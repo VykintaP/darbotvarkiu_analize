@@ -3,7 +3,6 @@ import pandas as pd
 import logging
 import visualize.components.bar_committees as bar_committees
 
-import visualize.components.filters as filters_module
 import visualize.components.bar_topics as bar_topics
 import visualize.components.pie_topics as pie_topics
 import visualize.components.line_topics as line_topics
@@ -20,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
     State("committee-filter", "data")
 )
 def render_tab(tab, filtered_data, selected_topic, selected_committee):
-    print("[DEBUG] tab =", tab)
+    logging.debug("tab = %s", tab)
 
     if filtered_data:
         df = pd.DataFrame(filtered_data)
@@ -30,9 +29,9 @@ def render_tab(tab, filtered_data, selected_topic, selected_committee):
             "projektas", "atsakingi", "dalyviai"
         ])
 
-    print("[DEBUG] df.shape =", df.shape)
-    print("[DEBUG] columns =", df.columns.tolist())
-    print("[DEBUG] render_tab() triggered")
+    logging.debug("df.shape = %s", df.shape)
+    logging.debug("columns = %s", df.columns.tolist())
+    logging.debug("render_tab() triggered")
 
     if tab == "dashboard":
         if not df.empty and selected_committee is None:
